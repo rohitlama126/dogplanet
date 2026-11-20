@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dog Planet · Find your dog</title>
+<meta name="description" content="Type your Instagram @ and meet your dog on Dog Planet.">
+<script type="importmap">{ "imports": { "three": "./vendor/three.module.js" } }</script>
+<style>
+  :root { --brown: #3A2412; --gold: #F5C542; --ink: #2a1f3d; }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  html, body { margin: 0; height: 100%; background: #1a1030; color: #fff; font-family: "Arial Rounded MT Bold", "Nunito", ui-rounded, system-ui, sans-serif; }
+  .app { max-width: 520px; margin: 0 auto; min-height: 100%; display: flex; flex-direction: column; }
+  header { text-align: center; padding: 18px 16px 8px; }
+  h1 { margin: 0; font-size: 40px; letter-spacing: 2px; color: #fff; -webkit-text-stroke: 7px var(--brown); paint-order: stroke fill; }
+  .by { color: var(--gold); font-size: 15px; margin-top: 2px; }
+  form { display: flex; gap: 8px; padding: 10px 16px; }
+  .in { flex: 1; min-width: 0; display: flex; align-items: center; background: #fff; border-radius: 999px; border: 4px solid var(--brown); padding: 0 14px; }
+  .in span { color: #9a8a7a; font-size: 20px; }
+  input { flex: 1; border: 0; outline: 0; font: inherit; font-size: 19px; padding: 12px 6px; color: var(--ink); background: transparent; min-width: 0; }
+  button, .btn { font: inherit; font-size: 16px; white-space: nowrap; border: 4px solid var(--brown); border-radius: 999px; padding: 10px 18px; background: var(--gold); color: var(--brown); cursor: pointer; text-decoration: none; display: inline-block; text-align: center; }
+  .stagewrap { position: relative; width: 100%; aspect-ratio: 4 / 5; max-height: 70vh; margin: 0 auto; }
+  canvas#gl { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  #card { position: relative; margin: -70px 14px 0; background: #FFFDF7; color: var(--brown); border: 5px solid var(--brown); border-radius: 26px; padding: 16px 20px 14px; box-shadow: 0 10px 0 rgba(58,36,18,.35); }
+  .row1 { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+  #cid { font-size: 24px; white-space: nowrap; } #cid b { color: #E0A800; }
+  .badge { font-size: 13px; padding: 6px 12px; border-radius: 999px; color: #fff; letter-spacing: 1px; white-space: nowrap; }
+  .COMMON { background: #8A9AA8; } .RARE { background: #3F7CC4; } .LEGENDARY { background: linear-gradient(90deg,#5B4FD6,#E36F9B,#F5C542); }
+  #handle { color: #C8553D; font-size: 24px; margin-top: 4px; word-break: break-all; }
+  .line { font-size: 18px; margin-top: 8px; } .quirk { font-size: 15px; color: #7A6656; font-style: italic; margin: 3px 0 0 28px; }
+  #wait { display: none; color: #5b4fd6; font-size: 16px; margin-top: 8px; }
+  #card.notyet #wait { display: block; } #card.notyet #cid { font-size: 22px; color: #5b4fd6; }
+  #actions { display: flex; flex-direction: column; gap: 10px; padding: 16px 14px 8px; }
+  #follow { background: linear-gradient(90deg,#f58529,#dd2a7b,#8134af); color: #fff; }
+  @media (max-width: 400px) { form button { padding: 10px 12px; font-size: 15px; } h1 { font-size: 34px; } }
+  html, body { overflow-x: hidden; }
+  footer { text-align: center; font-size: 13px; color: #b9a8e6; padding: 14px 16px 26px; }
+</style></head>
+<body><div class="app">
+  <header><h1>DOG PLANET</h1><div class="by">by @followerverse · every follower gets a dog</div></header>
+  <form id="form" autocomplete="off"><label class="in"><span>@</span><input id="who" placeholder="your instagram username" autocapitalize="none" spellcheck="false" maxlength="30"></label><button type="submit">Find my dog</button></form>
+  <div class="stagewrap"><canvas id="gl"></canvas></div>
+  <div id="card" hidden>
+    <div class="row1"><div id="cid"></div><div id="badge" class="badge"></div></div>
+    <div id="handle"></div>
+    <div class="line" id="dogline"></div><div class="quirk" id="quirk"></div>
+    <div class="line" id="homeline"></div><div id="wait"></div>
+  </div>
+  <div id="actions" hidden>
+    <a id="follow" class="btn" target="_blank" rel="noopener">Follow @followerverse to land 🐾</a>
+    <button id="save" type="button">Save my Planet ID 📸</button>
+  </div>
+  <footer>Your dog is the same every time: nobody can pick theirs.<br>Comment DOG on the reel 🐶</footer>
+</div><script type="module" src="./app.js"></script></body></html>
